@@ -1,0 +1,23 @@
+# Etapa 1 - Build da aplicação
+FROM node:20 AS builder
+
+WORKDIR /app
+
+# Copia os arquivos de dependências e instala
+COPY package.json package-lock.json* ./
+RUN npm install --legacy-peer-deps
+
+# Copia todo o código e gera o build de produção
+COPY . .
+RUN npm run build
+
+# Etapa 2 - Servir o app com imagem enxuta
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY --from=builder /app ./
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
