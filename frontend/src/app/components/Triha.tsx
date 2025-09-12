@@ -20,7 +20,11 @@ export default function Trilhas() {
     const buttons = [1, 2, 3, 4, 5];
 
     // Função que controla o clique nos botões
-    const handleButtonClick = (buttonIndex) => {
+    interface ButtonClickHandler {
+        (buttonIndex: number): void;
+    }
+
+    const handleButtonClick: ButtonClickHandler = (buttonIndex) => {
         // Apenas permite navegação se não estiver bloqueado
         if (buttonIndex < buttons.length - 2) {
             window.location.href = `curso`; // redireciona para a página do curso

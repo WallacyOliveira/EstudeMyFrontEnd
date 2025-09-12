@@ -21,7 +21,17 @@ const CalendarPage = () => {
             .then((response) => response.json())
             .then((data) => {
                 // Formata os eventos para o FullCalendar
-                const formattedEvents = data.map(event => ({
+                interface ApiEvent {
+                    title: string;
+                    date: string;
+                }
+
+                interface CalendarEvent {
+                    title: string;
+                    date: string;
+                }
+
+                const formattedEvents: CalendarEvent[] = (data as ApiEvent[]).map((event: ApiEvent) => ({
                     title: event.title,
                     date: format(new Date(event.date), 'yyyy-MM-dd') // FullCalendar exige data neste formato
                 }));
@@ -49,7 +59,7 @@ const CalendarPage = () => {
                 plugins={[dayGridPlugin, interactionPlugin]} // Plugins para exibição e interação
                 initialView="dayGridMonth" // Visualização inicial: mês
                 events={events} // Lista de eventos do estado
-                eventClick={(info) => alert(`Evento: ${info.event.title} em ${info.event.start.toLocaleString()}`)} // Ação ao clicar em evento
+                eventClick={(info) => alert(`Evento: ${info.event.title} em ${info.event.start ? info.event.start.toLocaleString() : 'Data desconhecida'}`)} // Ação ao clicar em evento
                 headerToolbar={{ // Configuração da barra de navegação do calendário
                     left: 'prev,next today',
                     center: 'title',

@@ -17,7 +17,7 @@ export default function Quiz() {
     // Estado para controlar índice da pergunta atual
     const [indiceAtual, setIndiceAtual] = useState(0);
     // Alternativa selecionada pelo usuário
-    const [respostaSelecionada, setRespostaSelecionada] = useState(null);
+    const [respostaSelecionada, setRespostaSelecionada] = useState<number | null>(null);
     // Estado que indica se o quiz foi finalizado
     const [finalizado, setFinalizado] = useState(false);
     // Pontuação atual do usuário
@@ -27,7 +27,21 @@ export default function Quiz() {
     const perguntaAtual = perguntas[indiceAtual];
 
     // Função chamada ao clicar em uma alternativa
-    function selecionarResposta(indice) {
+    interface Pergunta {
+        id: number;
+        texto: string;
+        alternativas: string[];
+        resposta: number;
+    }
+
+    interface QuizState {
+        indiceAtual: number;
+        respostaSelecionada: number | null;
+        finalizado: boolean;
+        pontuacao: number;
+    }
+
+    function selecionarResposta(indice: number): void {
         if (respostaSelecionada === null) { // só permite uma escolha
             setRespostaSelecionada(indice);
             if (indice === perguntaAtual.resposta) { // verifica acerto
@@ -47,7 +61,10 @@ export default function Quiz() {
     }
 
     // Converte índice da alternativa para letra (A, B, C, D...)
-    const letra = (i) => String.fromCharCode(65 + i);
+    interface LetraFn {
+        (i: number): string;
+    }
+    const letra: LetraFn = (i) => String.fromCharCode(65 + i);
 
     return (
         <main className="min-h-screen flex flex-col items-center justify-center ">

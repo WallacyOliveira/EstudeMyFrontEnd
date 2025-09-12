@@ -40,12 +40,24 @@ const Cadastrar = () => {
 
         try {
             // Monta os dados básicos
-            const dadosBasicos = {nome, email, senha, tipoUsuario};
+            const dadosBasicos: {
+                nome: string;
+                email: string;
+                senha: string;
+                tipoUsuario: "aluno" | "professor";
+                registro?: string;
+                titulacao?: string;
+            } = {nome, email, senha, tipoUsuario};
+
             let dadosCompletos = {...dadosBasicos};
 
             // Campos adicionais para professor
             if (tipoUsuario === "professor") {
-                dadosCompletos = {...dadosCompletos, registro};
+                dadosCompletos = {
+                    ...dadosCompletos,
+                    registro,
+                    titulacao
+                };
             }
 
             // Chamada à API de cadastro
