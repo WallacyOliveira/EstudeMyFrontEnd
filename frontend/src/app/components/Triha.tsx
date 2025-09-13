@@ -27,7 +27,7 @@ export default function Trilhas() {
     const handleButtonClick: ButtonClickHandler = (buttonIndex) => {
         // Apenas permite navegação se não estiver bloqueado
         if (buttonIndex < buttons.length - 2) {
-            window.location.href = `curso`; // redireciona para a página do curso
+            window.location.href = `game`; // redireciona para a página do curso
         }
     };
 

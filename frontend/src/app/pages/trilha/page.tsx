@@ -1,6 +1,7 @@
 import Footer from "@/app/components/Footer"; // Componente do rodapé da página
 import Topo from "@/app/components/Topo";     // Componente do topo / barra de navegação
 import Trilhas from "@/app/components/Triha"; // Componente que exibe as trilhas/cursos
+import game from "@/app/components/game/RPGQuizGame";
 
 export default function Home() {
     return (

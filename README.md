@@ -42,11 +42,12 @@ No repositório do frontend, este projeto utiliza:
 | **@fullcalendar/daygrid**     | Visualização de calendário em grade      |
 | **@fullcalendar/interaction** | Permite cliques e arraste no calendário  |
 | **date-fns**                  | Manipulação de datas simples e eficiente |
+| **phaser**                    | Framework de games do react              |
 
 
 Instale tudo com:
 
-npm install next react react-dom lucide-react tailwindcss @tailwindcss/forms react-bootstrap bootstrap @fullcalendar/react @fullcalendar/daygrid @fullcalendar/interaction date-fns
+npm install next react react-dom lucide-react tailwindcss @tailwindcss/forms react-bootstrap bootstrap @fullcalendar/react @fullcalendar/daygrid @fullcalendar/interaction date-fns phaser
 
 
 Dica: use --legacy-peer-deps se encontrar conflitos de versão:
