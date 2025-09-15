@@ -16,6 +16,7 @@ import {
     Person,
     ThreeDots,
     Gear,
+    Cart,
 } from "react-bootstrap-icons";
 
 const Topo = () => {
@@ -58,6 +59,11 @@ const Topo = () => {
             icon: <BackpackFill size={18}/>,
             label: "Criar Trilhas",
             href: "/pages/criarTrilha",
+        },
+        {
+            icon: <Cart size={18}/>,
+            label: "Loja",
+            href: "/pages/loja",
         },
     ];
 
