@@ -19,13 +19,16 @@ import {
     Cart,
 } from "react-bootstrap-icons";
 
+// Componente principal do topo/navegação
 const Topo = () => {
-    const [collapsed, setCollapsed] = useState(true);
-    const [sidebarToggled, setSidebarToggled] = useState(false);
-    const [navbarToggled, setNavbarToggled] = useState(false);
-    const [showDropdown, setShowDropdown] = useState(false);
-    const [isMobile, setIsMobile] = useState(false);
+    // Estados para controlar o comportamento do menu lateral e navbar
+    const [collapsed, setCollapsed] = useState(true); // Sidebar recolhida ou não
+    const [sidebarToggled, setSidebarToggled] = useState(false); // Sidebar aberta no mobile
+    const [navbarToggled, setNavbarToggled] = useState(false); // Navbar aberta no mobile
+    const [showDropdown, setShowDropdown] = useState(false); // Dropdown "Mais" visível
+    const [isMobile, setIsMobile] = useState(false); // Se está em tela mobile
 
+    // Hook para detectar se está em tela mobile
     useEffect(() => {
         const checkMobile = () => {
             setIsMobile(window.innerWidth < 992);
@@ -37,7 +40,7 @@ const Topo = () => {
         return () => window.removeEventListener("resize", checkMobile);
     }, []);
 
-    // Dados dos menus
+    // Dados dos menus laterais (sidebar)
     const sidebarItems = [
         {
             icon: <Book size={18}/>,
@@ -67,6 +70,7 @@ const Topo = () => {
         },
     ];
 
+    // Dados dos menus superiores (navbar)
     const navItems = [
         {
             href: "/pages/home",
@@ -81,6 +85,7 @@ const Topo = () => {
         },
     ];
 
+    // Itens do dropdown "Mais"
     const dropdownItems = [
         {href: "/pages/conta", label: "Conta"},
         {href: "/pages/calendario", label: "Calendário"},
@@ -89,6 +94,7 @@ const Topo = () => {
         {href: "/", label: "Sair", variant: "danger"},
     ];
 
+    // Fecha o sidebar ao clicar em um link no mobile
     const handleSidebarLinkClick = () => {
         if (isMobile) {
             setSidebarToggled(false);
@@ -97,6 +103,7 @@ const Topo = () => {
 
     return (
         <div className="flex">
+            {/* Botão para abrir o sidebar no mobile */}
             {isMobile && (
                 <button
                     onClick={() => setSidebarToggled(!sidebarToggled)}
@@ -123,6 +130,7 @@ const Topo = () => {
                 </button>
             )}
 
+            {/* Fundo escuro ao abrir o sidebar no mobile */}
             {isMobile && sidebarToggled && (
                 <div
                     style={{
@@ -138,6 +146,7 @@ const Topo = () => {
                 />
             )}
 
+            {/* Sidebar lateral (menu principal) */}
             <Sidebar
                 collapsed={isMobile ? false : collapsed}
                 toggled={false}
@@ -163,6 +172,7 @@ const Topo = () => {
                     },
                 }}
             >
+                {/* Menu do sidebar */}
                 <Menu
                     menuItemStyles={{
                         button: {
@@ -175,6 +185,7 @@ const Topo = () => {
                     }}
                 >
 
+                    {/* Item do menu para expandir/recolher */}
                     <MenuItem
                         icon={<List className="text-white" size={20}/>}
                         onClick={() => {
@@ -196,7 +207,7 @@ const Topo = () => {
                         )}
                     </MenuItem>
 
-
+                    {/* Lista dos itens do menu lateral */}
                     <div
                         style={{
                             height: "calc(100vh - 120px)",
@@ -220,7 +231,7 @@ const Topo = () => {
                         ))}
                     </div>
 
-
+                    {/* Item fixo no final do sidebar (ConsultAI) */}
                     <div
                         style={{
                             position: "absolute",
@@ -254,7 +265,7 @@ const Topo = () => {
                 </Menu>
             </Sidebar>
 
-
+            {/* Conteúdo principal e navbar superior */}
             <div
                 style={{
                     marginLeft: isMobile ? "0px" : collapsed ? "0px" : "00px",
@@ -262,6 +273,7 @@ const Topo = () => {
                     width: "100%",
                 }}
             >
+                {/* Navbar superior */}
                 <Navbar
                     expand="lg"
                     className="menu-central"
@@ -279,6 +291,7 @@ const Topo = () => {
                             alignItems: "center",
                         }}
                     >
+                        {/* Logo do sistema */}
                         <Link href="/" passHref legacyBehavior>
                             <div
                                 style={{
@@ -296,14 +309,14 @@ const Topo = () => {
                                     }}
                                 >
                                     {/* Logo */}
-                                    <div className="mb-6 text-center">
+                                    <div className="mb-6 text-center my-1">
                                         <img src="/svg/EstudeMyLogo.svg" alt="Logo"/>
                                     </div>
                                 </div>
                             </div>
                         </Link>
 
-
+                        {/* Botão para abrir navbar no mobile */}
                         <Navbar.Toggle
                             aria-controls="top-navbar"
                             onClick={() => setNavbarToggled(!navbarToggled)}
@@ -316,6 +329,7 @@ const Topo = () => {
                             <span className="navbar-toggler-icon"></span>
                         </Navbar.Toggle>
 
+                        {/* Itens do menu superior */}
                         <Navbar.Collapse id="top-navbar" className="justify-content-end">
                             <Nav
                                 as="ul"
@@ -324,6 +338,7 @@ const Topo = () => {
                                     alignItems: "center",
                                 }}
                             >
+                                {/* Itens principais do menu */}
                                 {navItems.map((item, index) => (
                                     <Nav.Item as="li" key={index}>
                                         <Link href={item.href} passHref legacyBehavior>
@@ -336,6 +351,7 @@ const Topo = () => {
                                                     minHeight: isMobile ? "32px" : "auto",
                                                 }}
                                             >
+                                                {/* Ícone do item */}
                                                 {React.cloneElement(item.icon, {
                                                     className: "me-1",
                                                     size: isMobile ? 16 : 18,
@@ -346,6 +362,7 @@ const Topo = () => {
                                     </Nav.Item>
                                 ))}
 
+                                {/* Dropdown "Mais" (aparece só no desktop) */}
                                 {!isMobile && (
                                     <Nav.Item as="li" className="dropdown-container">
                                         <div
@@ -359,6 +376,7 @@ const Topo = () => {
                                                 Mais
                                             </div>
 
+                                            {/* Itens do dropdown */}
                                             {showDropdown && (
                                                 <div className="custom-dropdown">
                                                     {dropdownItems.map((item, index) => (
@@ -379,7 +397,7 @@ const Topo = () => {
                                     </Nav.Item>
                                 )}
 
-
+                                {/* Itens do dropdown "Mais" (aparecem direto no mobile) */}
                                 {isMobile &&
                                     dropdownItems.map((item, index) => (
                                         <Nav.Item as="li" key={`mobile-${index}`}>
@@ -410,4 +428,3 @@ const Topo = () => {
 };
 
 export default Topo;
-
