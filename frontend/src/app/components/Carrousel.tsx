@@ -23,20 +23,20 @@ function CarouselItem({item}: { item: (typeof items)[0] }) {
     return (
         <Link href={`/pages/trilha?id=${item.id}`}>
             <div
-                className="bg-white p-4 rounded-3xl shadow-md text-center hover:scale-105 transition-transform min-w-[220px] sm:min-w-[240px] md:min-w-[260px] lg:min-w-[280px] max-w-[90vw] flex-shrink-0">
-                {/* Imagem do curso */}
-                <img
-                    src={item.image}
-                    alt={item.title}
-                    className="max-w-60 max-h-50 min-w-60 min-h-50 object-contain mb-2 rounded-2xl"
-                />
-                {/* Título do curso */}
-                <h2 className="text-white font-semibold bg-amber-500 rounded px-2 py-1 text-sm md:text-base lg:text-lg xl:text-xl truncate">
-                    {item.title}
-                </h2>
-                {/* Descrição */}
-                <p className="text-sm text-black-500 mt-1">{item.description}</p>
-            </div>
+            className="bg-white p-3 rounded-2xl shadow-md text-center hover:scale-105 transition-transform min-w-[140px] sm:min-w-[160px] md:min-w-[180px] lg:min-w-[200px] max-w-[60vw] flex-shrink-0">
+            {/* Imagem do curso */}
+            <img
+                src={item.image}
+                alt={item.title}
+                className="mx-auto max-w-30 max-h-24 min-w-28 min-h-24 object-contain mb-2 rounded-xl"
+            />
+            {/* Título do curso */}
+            <h2 className="text-white font-semibold bg-amber-500 rounded px-2 py-1 text-xs md:text-sm truncate">
+                {item.title}
+            </h2>
+            {/* Descrição */}
+            <p className="text-xs text-black-500 mt-1">{item.description}</p>
+        </div>
         </Link>
     );
 }
@@ -56,7 +56,7 @@ function Carrousel() {
     };
 
     return (
-        <div className="flex flex-col items-center gap-4 bg-slate-200 p-4 rounded-xl w-full max-w-screen-xl mx-auto">
+        <div className="flex flex-col items-center gap-4 p-4 rounded-xl w-full max-w-screen-xl mx-auto">
             {/* ===============================
           Barra de navegação do carrossel
           =============================== */}
@@ -64,9 +64,9 @@ function Carrousel() {
                 {/* Botão de scroll para a esquerda */}
                 <button
                     onClick={() => scroll(-300)}
-                    className="p-2 hover:bg-slate-300 rounded-full"
+                    className="p-3 hover:bg-sky-50 rounded"
                 >
-                    <ChevronLeftIcon className="w-6 h-6"/>
+                    <ChevronLeftIcon className="w-10 h-10"/>
                 </button>
 
                 {/* Container com scroll horizontal */}
@@ -82,9 +82,9 @@ function Carrousel() {
                 {/* Botão de scroll para a direita */}
                 <button
                     onClick={() => scroll(300)}
-                    className="p-2 hover:bg-slate-300 rounded-full"
+                    className="p-3 hover:bg-sky-50 rounded"
                 >
-                    <ChevronRightIcon className="w-6 h-6"/>
+                    <ChevronRightIcon className="w-10 h-10"/>
                 </button>
             </div>
         </div>
