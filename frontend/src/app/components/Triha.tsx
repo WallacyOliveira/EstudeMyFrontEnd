@@ -10,6 +10,7 @@ function TooltipStart() {
             className="absolute -top-14 animate-float bg-white text-blue-500 px-4 py-1 rounded shadow-md text-2xl z-20
                 before:content-[''] before:absolute before:bottom-[-6px] before:left-1/2 before:-translate-x-1/2 
                 before:border-4 before:border-transparent before:border-t-white"
+        
         >
             Começar
         </div>
@@ -17,9 +18,11 @@ function TooltipStart() {
 }
 
 function TooltipDescricao({
+  index,
   onStart,
   onClose,
 }: {
+  index : number
   onStart: () => void;
   onClose: () => void;
 }) {
@@ -39,7 +42,7 @@ function TooltipDescricao({
       className="absolute -bottom-36 left-1/2 -translate-x-1/2 w-64 bg-blue-500 rounded-2xl shadow-2xl text-white p-4 z-50"
     >
       <p className="font-bold text-lg">DESCRIÇÃO</p>
-      <p className="text-sm opacity-90 mb-3">Lição 1 de 4</p>
+      <p className="text-sm opacity-90 mb-3">Lição {index + 1}</p>
       <button
         onClick={onStart}
         className="bg-white text-blue-500 font-bold w-full py-2 rounded-xl shadow-md hover:scale-105 active:scale-95 transition-all"
@@ -101,8 +104,6 @@ export default function Trilhas() {
         {buttons.map((_, index) => {
           const isLocked = index >= buttons.length - 2;
           const isLeft = index % 2 === 0;
-          {/* Tooltip especial no terceiro botão */}
-          {index === 2 && <TooltipStart />}
 
           return (
             <div
@@ -130,16 +131,14 @@ export default function Trilhas() {
                 <AnimatePresence>
                   {tooltipIndex === index && !isLocked && (
                     <TooltipDescricao
+                      index={index}
                       onStart={handleStart}
                       onClose={closeTooltip}
                     />
                   )}
                 </AnimatePresence>
 
-                <span className="mt-2 text-sm text-gray-600">
-                  {isLocked ? "Bloqueado" : `Trilha ${index + 1}`}
-                </span>
-              </div>
+              </div>  
             </div>
           );
         })}
