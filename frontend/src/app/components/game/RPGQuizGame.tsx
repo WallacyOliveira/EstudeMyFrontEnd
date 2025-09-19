@@ -1,12 +1,14 @@
 import { useEffect, useRef } from "react";
 import { config } from "@/app/game/config";
 import MainScene from "@/app/game/scenes/MainScene";
+import Phaser from "phaser";
 
 export default function RPGQuizGame() {
-  const gameRef = useRef<any>(null);
+  const gameRef = useRef<Phaser.Game | null>(null);
 
   useEffect(() => {
-    let Phaser: any;
+    let Phaser: typeof import("phaser").default;
+
 
     const loadPhaser = async () => {
       Phaser = (await import("phaser")).default;

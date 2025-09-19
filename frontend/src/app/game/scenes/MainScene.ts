@@ -1,6 +1,13 @@
 import * as Phaser from "phaser";
+
+interface Pergunta {
+  pergunta: string;
+  opcoes: string[];
+  resposta: string;
+}
  
 export default class MainScene extends Phaser.Scene {
+  perguntaAtual: Pergunta;
   jogadorHP = 100;
   inimigoHP = 100;
  
@@ -30,7 +37,10 @@ export default class MainScene extends Phaser.Scene {
       resposta: "Azul",
     },
   ];
-  perguntaAtual: any;
+  
+
+
+
  
   readonly LETRAS = ["A", "B", "C", "D", "E"];
  

@@ -10,7 +10,13 @@ const CalendarPage = () => {
     // ===============================
     // Estado para armazenar eventos
     // ===============================
-    const [events, setEvents] = useState<any[]>([]);
+    interface CalendarEvent {
+  title: string;
+  date: string;
+}
+
+const [events, setEvents] = useState<CalendarEvent[]>([]);
+
 
     // ===============================
     // Efeito para buscar eventos da API

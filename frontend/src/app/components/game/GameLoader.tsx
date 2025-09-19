@@ -1,9 +1,10 @@
 "use client";
 
+import Phaser from "phaser";
 import { useEffect, useRef } from "react";
 
 export default function GameLoader() {
-  const gameRef = useRef<any>(null);
+  const gameRef = useRef<Phaser.Game | null>(null);
 
   useEffect(() => {
     const loadPhaser = async () => {
